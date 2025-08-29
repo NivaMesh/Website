@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niva Mesh </title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-background">
+        <div class="particles"></div>
+        <div class="mesh-lines"></div>
+        <div class="floating-nodes"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="logo-dot"></div>
+                </div>
+                <span>Niva Mesh</span>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <div class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#system-design" class="nav-link">System Design</a></li>
+                <li><a href="#results" class="nav-link">Results</a></li>
+                <li><a href="#use-cases" class="nav-link">Use Cases</a></li>
+                <li><a href="#team" class="nav-link">Team <i class="fas fa-sync-alt"></i></a></li>
+            </ul>
+            <div class="cta-buttons">
+                <button class="btn btn-secondary">Read Whitepaper</button>
+                <button class="btn btn-primary">View PoC Results</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <!-- <div class="tech-badge">
+                <i class="fas fa-users-cog"></i> // Removed this badge it not needed
+                <span>Disaster Response Technology</span>
+            </div> -->
+            <h1 class="hero-title">
+                <span class="title-niva">Niva</span>
+                <span class="title-mesh">Mesh</span>
+            </h1>
+            <p class="hero-description">
+                Lightweight decentralized BLE mesh communication for disaster response
+            </p>
+            <div class="feature-badges">
+                <div class="feature-badge">
+                    <i class="fas fa-network-wired"></i>
+                    <span>BLE Mesh</span>
+                </div>
+                <div class="feature-badge">
+                    <i class="fas fa-route"></i>
+                    <span>Hop Forwarding</span>
+                </div>
+                <div class="feature-badge">
+                    <i class="fas fa-shield-check"></i>
+                    <span>94% Coverage</span>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <button class="btn btn-primary btn-large">
+                    Read Whitepaper
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+                <button class="btn btn-secondary btn-large">View PoC Results</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section class="metrics" id="metrics">
+        <div class="metrics-container">
+            <div class="metric-card">
+                <div class="metric-value">94%</div>
+                <div class="metric-label">Coverage Rate</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">2.0mJ</div>
+                <div class="metric-label">Energy per Message</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">≤1.6s</div>
+                <div class="metric-label">Typical Latency</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-about">About</span>
+                <span class="title-niva-mesh">Niva Mesh</span>
+            </h2>
+            <p class="about-description">
+                Niva Mesh provides resilient civilian-to-rescuer connectivity when infrastructure fails, using BLE mesh networks, hop-forwarding, clustering, and localization algorithms. Our framework ensures critical communication capabilities during disasters when traditional networks are compromised.
+            </p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Ultra-Low Power</h3>
+                    <p>Optimized BLE communication with energy cost of only 2.9 mJ per message.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Decentralized Network</h3>
+                    <p>No infrastructure dependency - devices form autonomous mesh networks.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Extended Range</h3>
+                    <p>Multi-hop forwarding extends communication range beyond single device limits.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Resilient Design</h3>
+                    <p>Self-healing network topology adapts to device failures and mobility.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- System Design Section -->
+    <section class="system-design" id="system-design">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-system">System</span>
+                <span class="title-architecture">Architecture</span>
+            </h2>
+            <p class="section-subtitle">
+                Four core components work together to create a resilient mesh communication framework.
+            </p>
+            <div class="architecture-grid">
+                <div class="architecture-card">
+                    <div class="architecture-icon">
+                        <i class="fas fa-sitemap"></i>
+                    </div>
+                    <h3>BLE Mesh Formation</h3>
+                    <p>Devices automatically discover and connect to nearby nodes using Bluetooth Low Energy protocols</p>
+                    <div class="architecture-tags">
+                        <span class="tag">Auto-discovery</span>
+                        <span class="tag">Dynamic topology</span>
+                        <span class="tag">Connection management</span>
+                    </div>
+                </div>
+                <div class="architecture-card">
+                    <div class="architecture-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h3>Hop-based Forwarding</h3>
+                    <p>Messages are relayed through multiple nodes to extend communication range beyond single-hop limits</p>
+                    <div class="architecture-tags">
+                        <span class="tag">Multi-hop routing</span>
+                        <span class="tag">Path optimization</span>
+                        <span class="tag">Loop prevention</span>
+                    </div>
+                </div>
+                <div class="architecture-card">
+                    <div class="architecture-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3>Clustering & Aggregation</h3>
+                    <p>Network nodes organize into clusters for efficient resource management and data aggregation</p>
+                    <div class="architecture-tags">
+                        <span class="tag">Cluster formation</span>
+                        <span class="tag">Data aggregation</span>
+                        <span class="tag">Load balancing</span>
+                    </div>
+                </div>
+                <div class="architecture-card">
+                    <div class="architecture-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Rescuer Triangulation</h3>
+                    <p>Emergency responders can locate civilians using network-based positioning and signal triangulation</p>
+                    <div class="architecture-tags">
+                        <span class="tag">Position estimation</span>
+                        <span class="tag">Signal strength mapping</span>
+                        <span class="tag">Location services</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results" id="results">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-simulation">Simulation &</span>
+                <span class="title-poc-results">PoC Results</span>
+            </h2>
+            <p class="section-subtitle">
+                Comprehensive testing demonstrates exceptional performance across key metrics.
+            </p>
+            
+            <!-- KPI Cards -->
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-value">94%</div>
+                    <div class="kpi-label">Coverage Rate</div>
+                    <div class="kpi-description">Network coverage at extended range.</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">2.0 mJ</div>
+                    <div class="kpi-label">Energy Cost</div>
+                    <div class="kpi-description">Per message transmission.</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">≤1.6s</div>
+                    <div class="kpi-label">Latency</div>
+                    <div class="kpi-description">Typical end-to-end delay.</div>
+                </div>
+                <!-- <div class="kpi-card">
+                    <div class="kpi-value">50+</div>
+                    <div class="kpi-label">Node Capacity</div> // Removed this KPI as it is not needed
+                    <div class="kpi-description">Devices per cluster.</div>
+                </div> -->
+            </div>
+
+
+
+            <!-- Energy Breakdown -->
+            <div class="energy-breakdown">
+                <h3>Energy Breakdown</h3>
+                <p>Detailed analysis of energy consumption across different operations shows message transmission as the primary energy cost, while idle consumption remains minimal.</p>
+                <div class="energy-content">
+                    <div class="energy-legend">
+                        <div class="legend-item">
+                            <span class="legend-color cyan"></span>
+                            <span>Message Tx</span>
+                            <span class="energy-value">2.0 mJ</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color blue"></span>
+                            <span>Discovery</span>
+                            <span class="energy-value">1.2 mJ</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color green"></span>
+                            <span>Maintenance</span>
+                            <span class="energy-value">0.8 mJ</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color purple"></span>
+                            <span>Idle</span>
+                            <span class="energy-value">0.1 mJ</span>
+                        </div>
+                    </div>
+                    <div class="energy-chart">
+                        <canvas id="energyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="use-cases" id="use-cases">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-real-world">Real-World</span>
+                <span class="title-use-cases">Use Cases</span>
+            </h2>
+            <p class="section-subtitle">
+                Niva Mesh addresses critical communication challenges across diverse scenarios.
+            </p>
+            <div class="use-cases-grid">
+                <div class="use-case-card disaster">
+                    <div class="use-case-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Disaster Response</h3>
+                    <p>Critical communication when infrastructure fails during earthquakes, floods, hurricanes, and other natural disasters.</p>
+                    <ul class="use-case-features">
+                        <li>Emergency coordination</li>
+                        <li>Survivor location</li>
+                        <li>Resource distribution</li>
+                        <li>Medical triage</li>
+                    </ul>
+                    <div class="use-case-summary">Saves Lives</div>
+                </div>
+                <div class="use-case-card gatherings">
+                    <div class="use-case-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Large Gatherings</h3>
+                    <p>Reliable communication at concerts, festivals, protests, and mass events where cellular networks are overloaded.</p>
+                    <ul class="use-case-features">
+                        <li>Crowd management</li>
+                        <li>Safety coordination</li>
+                        <li>Information distribution</li>
+                        <li>Emergency alerts</li>
+                    </ul>
+                    <div class="use-case-summary">Ensures Safety</div>
+                </div>
+                <div class="use-case-card remote">
+                    <div class="use-case-icon">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <h3>Remote Connectivity</h3>
+                    <p>Communication in remote areas without cellular coverage, including wilderness, rural regions, and developing areas.</p>
+                    <ul class="use-case-features">
+                        <li>Expedition coordination</li>
+                        <li>Research communication</li>
+                        <li>Rural connectivity</li>
+                        <li>Border monitoring</li>
+                    </ul>
+                    <div class="use-case-summary">Extends Reach</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team" id="team">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-research">Research</span>
+                <span class="title-team">Team</span>
+            </h2>
+            <p class="section-subtitle">
+                Dedicated researchers advancing mesh communication technology for disaster response.
+            </p>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="team-name">Vishvas Parekh</h3>
+                    <p class="team-role">Lead Researcher & System Architect</p>
+                    <div class="expertise-section">
+                        <h4>Expertise</h4>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">BLE Mesh Networks</span>
+                            <span class="expertise-tag">Embedded Systems</span>
+                            <span class="expertise-tag">Network Protocols</span>
+                            <span class="expertise-tag">Algorithm Design</span>
+                        </div>
+                    </div>
+                    <div class="contributions-section">
+                        <h4>Key Contributions</h4>
+                        <ul class="contributions-list">
+                            <li>System architecture design</li>
+                            <li>BLE mesh implementation</li>
+                            <li>Performance optimization</li>
+                            <li>Research coordination</li>
+                        </ul>
+                    </div>
+                    <div class="team-social">
+                        <a href="#" class="social-link"><i class="fas fa-file-alt"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="team-name">Malay Joshi</h3>
+                    <p class="team-role">Research Engineer & Data Analyst</p>
+                    <div class="expertise-section">
+                        <h4>Expertise</h4>
+                        <div class="expertise-tags">
+                            <span class="expertise-tag">Network Analysis</span>
+                            <span class="expertise-tag">Simulation Modeling</span>
+                            <span class="expertise-tag">Data Processing</span>
+                            <span class="expertise-tag">Performance Testing</span>
+                        </div>
+                    </div>
+                    <div class="contributions-section">
+                        <h4>Key Contributions</h4>
+                        <ul class="contributions-list">
+                            <li>Simulation framework development</li>
+                            <li>Performance analysis</li>
+                            <li>Data visualization</li>
+                            <li>Testing protocols</li>
+                        </ul>
+                    </div>
+                    <div class="team-social">
+                        <a href="#" class="social-link"><i class="fas fa-file-alt"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <div class="footer-logo-icon">
+                        <div class="footer-logo-dot"></div>
+                    </div>
+                    <span>Niva Mesh</span>
+                </div>
+                <p class="footer-description">
+                    Resilient mesh communication framework for disaster response and emergency situations.
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="footer-social-link"><i class="fas fa-network-wired"></i></a>
+                    <a href="#" class="footer-social-link"><i class="fas fa-envelope"></i></a>
+                    <a href="#" class="footer-social-link"><i class="fas fa-share-alt"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#system-design">System Design</a></li>
+                    <li><a href="#results">Results</a></li>
+                    <li><a href="#use-cases">Use Cases</a></li>
+                    <li><a href="#team">Team</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-file-alt"></i> Whitepaper</a></li>
+                    <li><a href="#"><i class="fab fa-github"></i> GitHub Repository</a></li>
+                    <li><a href="#"><i class="fas fa-file-alt"></i> Research Papers</a></li>
+                    <li><a href="#"><i class="fas fa-file-alt"></i> Technical Documentation</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <div class="contact-info">
+                    <p><strong>Research Inquiries and Collaboration</strong></p>
+                    <a href="nivameshproject@gmail.com" class="contact-email">nivameshproject@gmail.com</a>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Niva Mesh Project. All rights reserved.</p>
+            <div class="footer-legal">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">License</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

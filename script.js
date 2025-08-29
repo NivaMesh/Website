@@ -1,0 +1,585 @@
+// Wait for DOM to load
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all functionality
+    initHeaderScroll();
+    initScrollAnimations();
+    initCharts();
+    initParticleSystem();
+    initSmoothScrolling();
+    initHoverEffects();
+    initTypingEffect();
+    initMobileMenu();
+});
+
+// Header scroll effect
+function initHeaderScroll() {
+    const header = document.querySelector('.header');
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        
+        if (currentScrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+
+        // Hide/show header on scroll
+        if (currentScrollY > lastScrollY && currentScrollY > 200) {
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            header.style.transform = 'translateY(0)';
+        }
+
+        lastScrollY = currentScrollY;
+    });
+}
+
+// Mobile menu functionality
+function initMobileMenu() {
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    const body = document.body;
+
+    if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close menu when clicking on nav links
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuBtn.classList.remove('active');
+                navLinks.classList.remove('active');
+                body.style.overflow = '';
+            });
+        });
+
+        // Close menu with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                mobileMenuBtn.classList.remove('active');
+                navLinks.classList.remove('active');
+                body.style.overflow = '';
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+                mobileMenuBtn.classList.remove('active');
+                navLinks.classList.remove('active');
+                body.style.overflow = '';
+            }
+        });
+    }
+}
+
+// Scroll animations
+function initScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                
+                // Add staggered animation for grid items
+                if (entry.target.classList.contains('feature-grid') || 
+                    entry.target.classList.contains('architecture-grid') ||
+                    entry.target.classList.contains('use-cases-grid') ||
+                    entry.target.classList.contains('team-grid')) {
+                    const items = entry.target.querySelectorAll('.feature-card, .architecture-card, .use-case-card, .team-card');
+                    items.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    });
+                }
+            }
+        });
+    }, observerOptions);
+
+    // Observe all sections
+    document.querySelectorAll('section').forEach(section => {
+        section.classList.add('fade-in');
+        observer.observe(section);
+    });
+
+    // Observe grid containers
+    document.querySelectorAll('.feature-grid, .architecture-grid, .use-cases-grid, .team-grid').forEach(grid => {
+        grid.classList.add('fade-in');
+        observer.observe(grid);
+        
+        // Initialize grid items
+        const items = grid.querySelectorAll('.feature-card, .architecture-card, .use-case-card, .team-card');
+        items.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'all 0.6s ease';
+        });
+    });
+}
+
+// Initialize charts (only Energy Chart)
+function initCharts() {
+    // Energy Chart
+    const energyCtx = document.getElementById('energyChart');
+    if (energyCtx) {
+        new Chart(energyCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Message Tx', 'Discovery', 'Maintenance', 'Idle'],
+                datasets: [{
+                    data: [2.0, 1.2, 0.8, 0.1],
+                    backgroundColor: [
+                        'rgba(0, 212, 255, 0.8)',
+                        'rgba(0, 153, 204, 0.8)',
+                        'rgba(0, 255, 136, 0.8)',
+                        'rgba(139, 92, 246, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(0, 212, 255, 1)',
+                        'rgba(0, 153, 204, 1)',
+                        'rgba(0, 255, 136, 1)',
+                        'rgba(139, 92, 246, 1)'
+                    ],
+                    borderWidth: 2,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                animation: {
+                    duration: 2000,
+                    easing: 'easeOutQuart'
+                },
+                cutout: '60%'
+            }
+        });
+    }
+}
+
+// Particle system for background
+function initParticleSystem() {
+    const particlesContainer = document.querySelector('.particles');
+    
+    // Create additional floating particles
+    for (let i = 0; i < 15; i++) {
+        createParticle(particlesContainer);
+    }
+}
+
+function createParticle(container) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    
+    // Random properties
+    const size = Math.random() * 4 + 2;
+    const x = Math.random() * 100;
+    const y = Math.random() * 100;
+    const duration = Math.random() * 10 + 10;
+    const delay = Math.random() * 5;
+    
+    particle.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        background: rgba(0, 212, 255, ${Math.random() * 0.5 + 0.3});
+        border-radius: 50%;
+        left: ${x}%;
+        top: ${y}%;
+        animation: floatParticle ${duration}s ease-in-out infinite;
+        animation-delay: ${delay}s;
+        pointer-events: none;
+    `;
+    
+    container.appendChild(particle);
+}
+
+// Add CSS for particles
+const particleStyles = document.createElement('style');
+particleStyles.textContent = `
+    @keyframes floatParticle {
+        0%, 100% {
+            transform: translateY(0px) translateX(0px) scale(1);
+            opacity: 0.3;
+        }
+        25% {
+            transform: translateY(-20px) translateX(10px) scale(1.2);
+            opacity: 0.8;
+        }
+        50% {
+            transform: translateY(-40px) translateX(-5px) scale(0.8);
+            opacity: 0.5;
+        }
+        75% {
+            transform: translateY(-20px) translateX(-15px) scale(1.1);
+            opacity: 0.7;
+        }
+    }
+`;
+document.head.appendChild(particleStyles);
+
+// Smooth scrolling for navigation links
+function initSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+}
+
+// Enhanced hover effects
+function initHoverEffects() {
+    // Add ripple effect to buttons
+    document.querySelectorAll('.btn').forEach(button => {
+        button.addEventListener('mouseenter', function(e) {
+            createRipple(e, this);
+        });
+    });
+
+    // Add tilt effect to cards
+    document.querySelectorAll('.feature-card, .architecture-card, .use-case-card, .team-card').forEach(card => {
+        card.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+            
+            this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+        });
+    });
+}
+
+// Create ripple effect
+function createRipple(event, element) {
+    const ripple = document.createElement('span');
+    const rect = element.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
+    
+    ripple.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        left: ${x}px;
+        top: ${y}px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        transform: scale(0);
+        animation: ripple 0.6s linear;
+        pointer-events: none;
+    `;
+    
+    element.appendChild(ripple);
+    
+    setTimeout(() => {
+        ripple.remove();
+    }, 600);
+}
+
+// Add ripple animation CSS
+const rippleStyles = document.createElement('style');
+rippleStyles.textContent = `
+    @keyframes ripple {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(rippleStyles);
+
+// Typing effect for hero title
+function initTypingEffect() {
+    const titleMesh = document.querySelector('.title-mesh');
+    if (titleMesh) {
+        const text = titleMesh.textContent;
+        titleMesh.textContent = '';
+        titleMesh.style.borderRight = '2px solid rgba(0, 212, 255, 0.8)';
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < text.length) {
+                titleMesh.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 150);
+            } else {
+                titleMesh.style.borderRight = 'none';
+            }
+        };
+        
+        // Start typing after a delay
+        setTimeout(typeWriter, 1000);
+    }
+}
+
+// Parallax effect for background elements
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const parallaxElements = document.querySelectorAll('.particles, .mesh-lines');
+    
+    parallaxElements.forEach(element => {
+        const speed = 0.5;
+        element.style.transform = `translateY(${scrolled * speed}px)`;
+    });
+});
+
+// Add floating mesh nodes dynamically
+function addFloatingNodes() {
+    const floatingNodes = document.querySelector('.floating-nodes');
+    
+    setInterval(() => {
+        if (Math.random() > 0.7) {
+            const node = document.createElement('div');
+            const size = Math.random() * 6 + 2;
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            
+            node.style.cssText = `
+                position: absolute;
+                width: ${size}px;
+                height: ${size}px;
+                background: rgba(0, 212, 255, ${Math.random() * 0.5 + 0.3});
+                border-radius: 50%;
+                left: ${x}%;
+                top: ${y}%;
+                animation: floatNode 8s ease-in-out forwards;
+                pointer-events: none;
+            `;
+            
+            floatingNodes.appendChild(node);
+            
+            setTimeout(() => {
+                node.remove();
+            }, 8000);
+        }
+    }, 2000);
+}
+
+// Add floating node animation CSS
+const floatingNodeStyles = document.createElement('style');
+floatingNodeStyles.textContent = `
+    @keyframes floatNode {
+        0% {
+            transform: translateY(0px) scale(0);
+            opacity: 0;
+        }
+        20% {
+            transform: translateY(-10px) scale(1);
+            opacity: 0.8;
+        }
+        80% {
+            transform: translateY(-30px) scale(1.2);
+            opacity: 0.6;
+        }
+        100% {
+            transform: translateY(-50px) scale(0);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(floatingNodeStyles);
+
+// Start floating nodes
+setTimeout(addFloatingNodes, 3000);
+
+// Add glow effect to interactive elements
+document.addEventListener('mousemove', (e) => {
+    const elements = document.querySelectorAll('.btn, .feature-card, .architecture-card, .use-case-card, .team-card');
+    
+    elements.forEach(element => {
+        const rect = element.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        if (x > 0 && x < rect.width && y > 0 && y < rect.height) {
+            element.style.boxShadow = `0 0 30px rgba(0, 212, 255, 0.4), 0 0 60px rgba(0, 212, 255, 0.2)`;
+        } else {
+            element.style.boxShadow = '';
+        }
+    });
+});
+
+// Add loading animation
+window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+    
+    // Animate metrics with counting effect
+    const metricValues = document.querySelectorAll('.metric-value');
+    metricValues.forEach(metric => {
+        const finalValue = metric.textContent;
+        const isPercentage = finalValue.includes('%');
+        const isUnit = finalValue.includes('mJ') || finalValue.includes('s');
+        
+        let startValue = 0;
+        const endValue = parseFloat(finalValue.replace(/[^0-9.]/g, ''));
+        const duration = 2000;
+        const startTime = Date.now();
+        
+        const updateCounter = () => {
+            const currentTime = Date.now();
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            const currentValue = startValue + (endValue - startValue) * easeOutQuart(progress);
+            
+            if (isPercentage) {
+                metric.textContent = Math.round(currentValue) + '%';
+            } else if (isUnit) {
+                metric.textContent = currentValue.toFixed(1) + finalValue.replace(/[0-9.]/g, '');
+            } else {
+                metric.textContent = Math.round(currentValue);
+            }
+            
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+            }
+        };
+        
+        updateCounter();
+    });
+});
+
+// Easing function
+function easeOutQuart(t) {
+    return 1 - Math.pow(1 - t, 4);
+}
+
+// Add CSS for loading state
+const loadingStyles = document.createElement('style');
+loadingStyles.textContent = `
+    body:not(.loaded) {
+        overflow: hidden;
+    }
+    
+    body:not(.loaded) .hero-content {
+        opacity: 0;
+    }
+    
+    .loaded .hero-content {
+        opacity: 1;
+        transition: opacity 1s ease;
+    }
+`;
+document.head.appendChild(loadingStyles);
+
+// Add intersection observer for performance metrics
+const performanceObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Animate KPI cards
+            const kpiCards = entry.target.querySelectorAll('.kpi-card');
+            kpiCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        }
+    });
+}, { threshold: 0.3 });
+
+// Observe results section
+const resultsSection = document.querySelector('.results');
+if (resultsSection) {
+    performanceObserver.observe(resultsSection);
+    
+    // Initialize KPI cards
+    const kpiCards = resultsSection.querySelectorAll('.kpi-card');
+    kpiCards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'all 0.6s ease';
+    });
+}
+
+// Add floating action button for scroll to top
+const scrollToTopBtn = document.createElement('button');
+scrollToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+scrollToTopBtn.className = 'scroll-to-top';
+scrollToTopBtn.style.cssText = `
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
+`;
+
+document.body.appendChild(scrollToTopBtn);
+
+// Show/hide scroll to top button
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        scrollToTopBtn.style.opacity = '1';
+        scrollToTopBtn.style.visibility = 'visible';
+        scrollToTopBtn.style.transform = 'translateY(0)';
+    } else {
+        scrollToTopBtn.style.opacity = '0';
+        scrollToTopBtn.style.visibility = 'hidden';
+        scrollToTopBtn.style.transform = 'translateY(20px)';
+    }
+});
+
+// Scroll to top functionality
+scrollToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// Add hover effect to scroll to top button
+scrollToTopBtn.addEventListener('mouseenter', function() {
+    this.style.transform = 'translateY(-5px) scale(1.1)';
+    this.style.boxShadow = '0 8px 30px rgba(0, 212, 255, 0.5)';
+});
+
+scrollToTopBtn.addEventListener('mouseleave', function() {
+    this.style.transform = 'translateY(0) scale(1)';
+    this.style.boxShadow = '0 4px 20px rgba(0, 212, 255, 0.3)';
+});
+
