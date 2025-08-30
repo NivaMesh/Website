@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initHoverEffects();
     initTypingEffect();
     initMobileMenu();
+    initCardHighlighting(); // Call the new function here
 });
 
 // Header scroll effect
@@ -259,26 +260,7 @@ function initHoverEffects() {
         });
     });
 
-    // Add tilt effect to cards
-    document.querySelectorAll('.feature-card, .architecture-card, .use-case-card, .team-card').forEach(card => {
-        card.addEventListener('mousemove', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 10;
-            const rotateY = (centerX - x) / 10;
-            
-            this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
-        });
-    });
+    // Cards are now static - no tilt effect
 }
 
 // Create ripple effect
@@ -321,28 +303,9 @@ rippleStyles.textContent = `
 `;
 document.head.appendChild(rippleStyles);
 
-// Typing effect for hero title
+// Typing effect removed - title is now static
 function initTypingEffect() {
-    const titleMesh = document.querySelector('.title-mesh');
-    if (titleMesh) {
-        const text = titleMesh.textContent;
-        titleMesh.textContent = '';
-        titleMesh.style.borderRight = '2px solid rgba(0, 212, 255, 0.8)';
-        
-        let i = 0;
-        const typeWriter = () => {
-            if (i < text.length) {
-                titleMesh.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 150);
-            } else {
-                titleMesh.style.borderRight = 'none';
-            }
-        };
-        
-        // Start typing after a delay
-        setTimeout(typeWriter, 1000);
-    }
+    // No typing animation
 }
 
 // Parallax effect for background elements
@@ -415,9 +378,9 @@ document.head.appendChild(floatingNodeStyles);
 // Start floating nodes
 setTimeout(addFloatingNodes, 3000);
 
-// Add glow effect to interactive elements
+// Add glow effect to buttons only (not cards)
 document.addEventListener('mousemove', (e) => {
-    const elements = document.querySelectorAll('.btn, .feature-card, .architecture-card, .use-case-card, .team-card');
+    const elements = document.querySelectorAll('.btn');
     
     elements.forEach(element => {
         const rect = element.getBoundingClientRect();
@@ -432,98 +395,16 @@ document.addEventListener('mousemove', (e) => {
     });
 });
 
-// Add loading animation
+// Page load event - no loading animation
 window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
-    
-    // Animate metrics with counting effect
-    const metricValues = document.querySelectorAll('.metric-value');
-    metricValues.forEach(metric => {
-        const finalValue = metric.textContent;
-        const isPercentage = finalValue.includes('%');
-        const isUnit = finalValue.includes('mJ') || finalValue.includes('s');
-        
-        let startValue = 0;
-        const endValue = parseFloat(finalValue.replace(/[^0-9.]/g, ''));
-        const duration = 2000;
-        const startTime = Date.now();
-        
-        const updateCounter = () => {
-            const currentTime = Date.now();
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            
-            const currentValue = startValue + (endValue - startValue) * easeOutQuart(progress);
-            
-            if (isPercentage) {
-                metric.textContent = Math.round(currentValue) + '%';
-            } else if (isUnit) {
-                metric.textContent = currentValue.toFixed(1) + finalValue.replace(/[0-9.]/g, '');
-            } else {
-                metric.textContent = Math.round(currentValue);
-            }
-            
-            if (progress < 1) {
-                requestAnimationFrame(updateCounter);
-            }
-        };
-        
-        updateCounter();
-    });
+    // Page is loaded
 });
 
-// Easing function
-function easeOutQuart(t) {
-    return 1 - Math.pow(1 - t, 4);
-}
+// Easing function removed - no longer needed
 
-// Add CSS for loading state
-const loadingStyles = document.createElement('style');
-loadingStyles.textContent = `
-    body:not(.loaded) {
-        overflow: hidden;
-    }
-    
-    body:not(.loaded) .hero-content {
-        opacity: 0;
-    }
-    
-    .loaded .hero-content {
-        opacity: 1;
-        transition: opacity 1s ease;
-    }
-`;
-document.head.appendChild(loadingStyles);
+// Loading styles removed - content is always visible
 
-// Add intersection observer for performance metrics
-const performanceObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            // Animate KPI cards
-            const kpiCards = entry.target.querySelectorAll('.kpi-card');
-            kpiCards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 200);
-            });
-        }
-    });
-}, { threshold: 0.3 });
-
-// Observe results section
-const resultsSection = document.querySelector('.results');
-if (resultsSection) {
-    performanceObserver.observe(resultsSection);
-    
-    // Initialize KPI cards
-    const kpiCards = resultsSection.querySelectorAll('.kpi-card');
-    kpiCards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = 'all 0.6s ease';
-    });
-}
+// KPI cards are now static - no animations
 
 // Add floating action button for scroll to top
 const scrollToTopBtn = document.createElement('button');
@@ -582,4 +463,20 @@ scrollToTopBtn.addEventListener('mouseleave', function() {
     this.style.transform = 'translateY(0) scale(1)';
     this.style.boxShadow = '0 4px 20px rgba(0, 212, 255, 0.3)';
 });
+
+// Card highlighting functionality
+function initCardHighlighting() {
+    // Get all cards
+    const cards = document.querySelectorAll('.feature-card, .architecture-card, .use-case-card, .team-card, .energy-breakdown');
+    
+    cards.forEach(card => {
+        card.addEventListener('click', function() {
+            // Remove highlight from all cards
+            cards.forEach(c => c.classList.remove('highlighted'));
+            
+            // Add highlight to clicked card
+            this.classList.add('highlighted');
+        });
+    });
+}
 
