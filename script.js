@@ -129,9 +129,9 @@ function initScrollAnimations() {
     });
 }
 
-// Initialize charts (only Energy Chart)
+// Initialize charts (Energy Chart for both mobile and desktop)
 function initCharts() {
-    // Energy Chart
+    // Desktop Energy Chart
     const energyCtx = document.getElementById('energyChart');
     if (energyCtx) {
         new Chart(energyCtx, {
@@ -169,6 +169,342 @@ function initCharts() {
                     easing: 'easeOutQuart'
                 },
                 cutout: '60%'
+            }
+        });
+    }
+    
+    // Mobile Energy Chart
+    const energyCtxMobile = document.getElementById('energyChartMobile');
+    if (energyCtxMobile) {
+        new Chart(energyCtxMobile, {
+            type: 'doughnut',
+            data: {
+                labels: ['Message Tx', 'Discovery', 'Maintenance', 'Idle'],
+                datasets: [{
+                    data: [2.0, 1.2, 0.8, 0.1],
+                    backgroundColor: [
+                        'rgba(0, 212, 255, 0.8)',
+                        'rgba(0, 153, 204, 0.8)',
+                        'rgba(0, 255, 136, 0.8)',
+                        'rgba(139, 92, 246, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(0, 212, 255, 1)',
+                        'rgba(0, 153, 204, 1)',
+                        'rgba(0, 255, 136, 1)',
+                        'rgba(139, 92, 246, 1)'
+                    ],
+                    borderWidth: 2,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                animation: {
+                    duration: 2000,
+                    easing: 'easeOutQuart'
+                },
+                cutout: '60%'
+            }
+        });
+    }
+    
+    // Energy Consumption Chart
+    const energyConsumptionCtx = document.getElementById('energyConsumptionChart');
+    if (energyConsumptionCtx) {
+        new Chart(energyConsumptionCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Low Density', 'Medium Density', 'High Density', 'Extreme Density', 'Temporary High', 'Disaster Scenario'],
+                datasets: [{
+                    label: 'Energy Consumption (mAh)',
+                    data: [7.25, 37.25, 57.85, 57.2, 46.4, 44.9],
+                    backgroundColor: [
+                        'rgba(0, 212, 255, 0.8)',
+                        'rgba(0, 153, 204, 0.8)',
+                        'rgba(0, 255, 136, 0.8)',
+                        'rgba(255, 193, 7, 0.8)',
+                        'rgba(255, 87, 34, 0.8)',
+                        'rgba(156, 39, 176, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(0, 212, 255, 1)',
+                        'rgba(0, 153, 204, 1)',
+                        'rgba(0, 255, 136, 1)',
+                        'rgba(255, 193, 7, 1)',
+                        'rgba(255, 87, 34, 1)',
+                        'rgba(156, 39, 176, 1)'
+                    ],
+                    borderWidth: 2,
+                    borderRadius: 8,
+                    borderSkipped: false,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(17, 17, 31, 0.9)',
+                        titleColor: '#ffffff',
+                        bodyColor: '#b0b0b0',
+                        borderColor: 'rgba(0, 212, 255, 0.3)',
+                        borderWidth: 1,
+                        cornerRadius: 8,
+                        displayColors: false,
+                        callbacks: {
+                            title: function(context) {
+                                return context[0].label;
+                            },
+                            label: function(context) {
+                                return context.parsed.y + ' mAh';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#b0b0b0',
+                            font: {
+                                size: 12
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0, 212, 255, 0.1)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#b0b0b0',
+                            font: {
+                                size: 12
+                            },
+                            callback: function(value) {
+                                return value + ' mAh';
+                            }
+                        }
+                    }
+                },
+                animation: {
+                    duration: 2000,
+                    easing: 'easeOutQuart'
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                }
+            }
+        });
+    }
+    
+    // Mean Localization Error Chart
+    const meanLocalizationCtx = document.getElementById('meanLocalizationChart');
+    if (meanLocalizationCtx) {
+        new Chart(meanLocalizationCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Low Density', 'Medium Density', 'High Density', 'Extreme Density', 'Temporary High', 'Disaster Scenario'],
+                datasets: [{
+                    label: 'Mean Localization Error (m)',
+                    data: [1.79, 1.5, 1.62, 1.66, 1.69, 1.59],
+                    backgroundColor: [
+                        'rgba(0, 212, 255, 0.8)',
+                        'rgba(0, 153, 204, 0.8)',
+                        'rgba(0, 255, 136, 0.8)',
+                        'rgba(255, 193, 7, 0.8)',
+                        'rgba(255, 87, 34, 0.8)',
+                        'rgba(156, 39, 176, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(0, 212, 255, 1)',
+                        'rgba(0, 153, 204, 1)',
+                        'rgba(0, 255, 136, 1)',
+                        'rgba(255, 193, 7, 1)',
+                        'rgba(255, 87, 34, 1)',
+                        'rgba(156, 39, 176, 1)'
+                    ],
+                    borderWidth: 2,
+                    borderRadius: 8,
+                    borderSkipped: false,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(17, 17, 31, 0.9)',
+                        titleColor: '#ffffff',
+                        bodyColor: '#b0b0b0',
+                        borderColor: 'rgba(0, 212, 255, 0.3)',
+                        borderWidth: 1,
+                        cornerRadius: 8,
+                        displayColors: false,
+                        callbacks: {
+                            title: function(context) {
+                                return context[0].label;
+                            },
+                            label: function(context) {
+                                return context.parsed.y + ' m';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#b0b0b0',
+                            font: {
+                                size: 12
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        max: 2,
+                        grid: {
+                            color: 'rgba(0, 212, 255, 0.1)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#b0b0b0',
+                            font: {
+                                size: 12
+                            },
+                            callback: function(value) {
+                                return value + ' m';
+                            }
+                        }
+                    }
+                },
+                animation: {
+                    duration: 2000,
+                    easing: 'easeOutQuart'
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                }
+            }
+        });
+    }
+
+    // Coverage Rate Chart
+    const coverageRateCtx = document.getElementById('coverageRateChart');
+    if (coverageRateCtx) {
+        new Chart(coverageRateCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Low Density', 'Medium Density', 'High Density', 'Extreme Density', 'Temporary High', 'Disaster Scenario'],
+                datasets: [{
+                    label: 'Coverage Rate (%)',
+                    data: [96.67, 99.33, 94.84, 93.77, 92.8, 99.78],
+                    backgroundColor: [
+                        'rgba(0, 212, 255, 0.8)',
+                        'rgba(0, 255, 136, 0.8)',
+                        'rgba(0, 153, 204, 0.8)',
+                        'rgba(255, 193, 7, 0.8)',
+                        'rgba(255, 87, 34, 0.8)',
+                        'rgba(156, 39, 176, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(0, 212, 255, 1)',
+                        'rgba(0, 255, 136, 1)',
+                        'rgba(0, 153, 204, 1)',
+                        'rgba(255, 193, 7, 1)',
+                        'rgba(255, 87, 34, 1)',
+                        'rgba(156, 39, 176, 1)'
+                    ],
+                    borderWidth: 2,
+                    borderRadius: 8,
+                    borderSkipped: false,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(17, 17, 31, 0.9)',
+                        titleColor: '#ffffff',
+                        bodyColor: '#b0b0b0',
+                        borderColor: 'rgba(0, 212, 255, 0.3)',
+                        borderWidth: 1,
+                        cornerRadius: 8,
+                        displayColors: false,
+                        callbacks: {
+                            title: function(context) {
+                                return context[0].label;
+                            },
+                            label: function(context) {
+                                return context.parsed.y + '%';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#b0b0b0',
+                            font: {
+                                size: 12
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: false,
+                        min: 90,
+                        max: 100,
+                        grid: {
+                            color: 'rgba(0, 212, 255, 0.1)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#b0b0b0',
+                            font: {
+                                size: 12
+                            },
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                },
+                animation: {
+                    duration: 2000,
+                    easing: 'easeOutQuart'
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                }
             }
         });
     }
@@ -231,6 +567,60 @@ particleStyles.textContent = `
             transform: translateY(-20px) translateX(-15px) scale(1.1);
             opacity: 0.7;
         }
+    }
+
+    // Mean Localization Error Chart
+    const meanLocalizationCtx = document.getElementById('meanLocalizationChart');
+    if (meanLocalizationCtx) {
+        new Chart(meanLocalizationCtx, {
+            type: 'line',
+            data: {
+                labels: ['Low Density', 'Medium Density', 'High Density', 'Extreme Density', 'Temporary High', 'Disaster Scenario'],
+                datasets: [{
+                    label: 'Mean Localization Error (m)',
+                    data: [1.79, 1.5, 1.62, 1.66, 1.69, 1.59],
+                    borderColor: 'rgba(0, 212, 255, 1)',
+                    backgroundColor: 'rgba(0, 212, 255, 0.12)',
+                    pointBackgroundColor: 'rgba(0, 212, 255, 1)',
+                    pointBorderColor: '#0b1220',
+                    pointRadius: 5,
+                    tension: 0.25,
+                    fill: true,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: 'rgba(17, 17, 31, 0.9)',
+                        titleColor: '#ffffff',
+                        bodyColor: '#b0b0b0',
+                        borderColor: 'rgba(0, 212, 255, 0.3)',
+                        borderWidth: 1,
+                        cornerRadius: 8,
+                        callbacks: {
+                            title: function(context) { return context[0].label; },
+                            label: function(context) { return context.parsed.y + ' m'; }
+                        }
+                    }
+                },
+                scales: {
+                    x: { grid: { display: false }, ticks: { color: '#b0b0b0' } },
+                    y: {
+                        beginAtZero: false,
+                        suggestedMin: 1.4,
+                        suggestedMax: 2.0,
+                        grid: { color: 'rgba(0, 212, 255, 0.06)', drawBorder: false },
+                        ticks: { color: '#b0b0b0', callback: function(value){ return value + ' m'; } }
+                    }
+                },
+                animation: { duration: 1400, easing: 'easeOutQuart' },
+                interaction: { intersect: false, mode: 'index' }
+            }
+        });
     }
 `;
 document.head.appendChild(particleStyles);

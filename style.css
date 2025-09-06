@@ -317,6 +317,28 @@ body {
 .btn-large {
     padding: 1rem 2rem;
     font-size: 1.1rem;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* Enhanced responsive styles for Read Whitepaper button */
+@media (max-width: 1024px) {
+    .btn-large {
+        padding: 0.9rem 1.8rem;
+        font-size: 1.05rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .btn-large {
+        padding: 0.85rem 1.5rem;
+        font-size: 1rem;
+        min-height: 46px;
+    }
 }
 
 /* Hero Section */
@@ -424,6 +446,59 @@ body {
     transform: translateY(-2px);
     border-color: var(--primary-accent);
     box-shadow: var(--shadow-glow);
+}
+
+.hero-feature-card {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--glass-bg);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem 2rem;
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    margin: 2rem 0;
+    animation: fadeInUp 1s ease-out 0.6s both;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.hero-feature-card:hover::before {
+    transform: translateX(100%);
+}
+
+.hero-feature-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary-accent);
+    box-shadow: var(--shadow-glow);
+}
+
+.hero-feature-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-accent);
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.hero-feature-label {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    text-align: center;
 }
 
 .hero-cta {
@@ -742,6 +817,210 @@ section {
 
 
 
+/* Mean Localization Error Chart */
+/* Mean Localization Error Chart */
+.mean-localization-error {
+    margin-top: 4rem;
+    background: #0E1117;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.localization-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.mean-localization-error h3 {
+    font-size: 2rem;
+    color: #FFFFFF;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.mean-localization-error p {
+    color: #A3A3A3;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    max-width: 800px;
+    line-height: 1.6;
+}
+
+.localization-chart-container {
+    width: 100%;
+    height: 400px;
+    background: #0E1117;
+    border-radius: 12px;
+    padding: 1rem;
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .mean-localization-error h3 {
+        font-size: 1.5rem;
+    }
+
+    .mean-localization-error p {
+        font-size: 1rem;
+    }
+
+    .localization-content {
+        padding: 1.5rem;
+    }
+}
+
+/* Energy Consumption Cards */
+.energy-consumption {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    backdrop-filter: blur(20px);
+    transition: all 0.3s ease;
+}
+
+.energy-consumption h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.energy-consumption p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.energy-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.energy-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.energy-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.energy-card:hover::before {
+    transform: translateX(100%);
+}
+
+.energy-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary-accent);
+    box-shadow: var(--shadow-glow);
+}
+
+.energy-card-value {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-accent);
+    margin-bottom: 0.5rem;
+}
+
+.energy-card-label {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.energy-chart-container {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 2rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.energy-chart-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, transparent, rgba(0, 212, 255, 0.05), transparent);
+    pointer-events: none;
+}
+
+/* Coverage Rate Chart */
+.coverage-rate {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    backdrop-filter: blur(20px);
+    transition: all 0.3s ease;
+    margin-bottom: 2rem;
+}
+
+.coverage-rate h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.coverage-rate p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.coverage-chart-container {
+    width: 100%;
+    height: 400px;
+    background: var(--glass-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.coverage-chart-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, transparent, rgba(0, 212, 255, 0.05), transparent);
+    pointer-events: none;
+}
+
 .energy-breakdown {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
@@ -769,6 +1048,23 @@ section {
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
     align-items: center;
+}
+
+/* Mobile-first energy content */
+@media (max-width: 768px) {
+    .energy-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .energy-chart {
+        order: 1;
+        margin-bottom: 1rem;
+    }
+    
+    .energy-legend {
+        order: 2;
+    }
 }
 
 .energy-legend {
@@ -1016,6 +1312,128 @@ section {
     transform: scale(1.02);
 }
 
+/* Mobile touch improvements */
+@media (max-width: 768px) {
+    .feature-card,
+    .architecture-card,
+    .use-case-card,
+    .team-card,
+    .energy-breakdown {
+        min-height: 44px; /* Minimum touch target size */
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .btn {
+        min-height: 44px;
+        padding: 1rem 1.5rem;
+    }
+    
+    .nav-link {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+    
+    /* Energy Consumption Cards mobile specific */
+    .energy-consumption {
+        margin: 1rem 0.5rem;
+        border-radius: 12px;
+        padding: 1.5rem;
+    }
+    
+    .energy-consumption h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    
+    .energy-consumption p {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        padding: 0 0.5rem;
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+    
+    .energy-cards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+    
+    .energy-card {
+        padding: 1.25rem;
+    }
+    
+    .energy-card-value {
+        font-size: 1.8rem;
+    }
+    
+    .energy-card-label {
+        font-size: 0.9rem;
+    }
+    
+    .energy-chart-container {
+        height: 300px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .coverage-rate {
+        margin: 1rem 0.5rem;
+        border-radius: 12px;
+        padding: 1.5rem;
+    }
+    
+    .coverage-rate h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    
+    .coverage-rate p {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        padding: 0 0.5rem;
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+    
+    .coverage-chart-container {
+        height: 300px;
+        padding: 1rem;
+    }
+    
+    /* Energy Breakdown mobile specific */
+    .energy-breakdown {
+        margin: 1rem 0.5rem;
+        border-radius: 12px;
+    }
+    
+    .energy-breakdown h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    
+    .energy-breakdown p {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        padding: 0 0.5rem;
+        line-height: 1.6;
+    }
+    
+    .legend-item-mobile {
+        background: rgba(17, 17, 31, 0.8);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+    }
+    
+    .legend-item-mobile:hover {
+        background: rgba(0, 212, 255, 0.1);
+        border-color: var(--primary-accent);
+    }
+}
+
 .team-name {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
@@ -1123,6 +1541,311 @@ section {
     font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 1rem;
+}
+
+/* Mobile-First Responsive Design */
+
+/* Energy Breakdown - Mobile Layout (Default) */
+.energy-mobile {
+    display: block;
+}
+
+.energy-desktop {
+    display: none;
+}
+
+.energy-chart-mobile {
+    width: 100%;
+    height: 250px;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.energy-legend-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.legend-item-mobile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.legend-text {
+    flex: 1;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.energy-value {
+    color: var(--primary-accent);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* Desktop Layout */
+@media (min-width: 769px) {
+    .energy-mobile {
+        display: none;
+    }
+    
+    .energy-desktop {
+        display: block;
+    }
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+    /* Header and Navigation */
+    .nav-container {
+        padding: 1rem;
+    }
+    
+    .nav-logo {
+        font-size: 1.2rem;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+    
+    .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(10, 10, 15, 0.98);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid var(--border-color);
+        padding: 1rem 0;
+        gap: 1rem;
+        z-index: 999;
+    }
+    
+    .nav-link {
+        padding: 1rem;
+        border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        font-size: 1.1rem;
+    }
+    
+    .cta-buttons {
+        display: none;
+    }
+    
+    .mobile-menu-btn {
+        display: flex;
+    }
+    
+    /* Hero Section */
+    .hero {
+        padding: 5rem 1rem 2rem;
+        text-align: center;
+    }
+    
+    .hero-title {
+        font-size: 2.2rem;
+        line-height: 1.2;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+        margin: 1rem 0;
+        padding: 0 0.5rem;
+    }
+    
+    .feature-badges {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        margin: 1.5rem 0;
+    }
+    
+    .hero-feature-card {
+        padding: 1.25rem 1.5rem;
+        margin: 1.5rem 0;
+    }
+    
+    .hero-feature-value {
+        font-size: 2rem;
+    }
+    
+    .hero-feature-label {
+        font-size: 1rem;
+    }
+    
+    .hero-cta {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        margin-top: 2rem;
+    }
+    
+    .btn-large {
+        width: 100%;
+        max-width: 280px;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    /* Metrics Section */
+    .metrics-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+    
+    .metric-card {
+        padding: 1.5rem;
+    }
+    
+    .metric-value {
+        font-size: 2.5rem;
+    }
+    
+    /* Sections */
+    .container {
+        padding: 2rem 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+        text-align: center;
+        line-height: 1.3;
+    }
+    
+    .section-subtitle {
+        text-align: center;
+        padding: 0 0.5rem;
+    }
+    
+    /* Grid Layouts */
+    .feature-grid,
+    .architecture-grid,
+    .use-cases-grid,
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    /* Cards */
+    .feature-card,
+    .architecture-card,
+    .use-case-card,
+    .team-card {
+        padding: 1.5rem;
+        margin: 0 0.5rem;
+    }
+    
+    /* KPI Grid */
+    .kpi-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .kpi-card {
+        padding: 1.5rem;
+        margin: 0 0.5rem;
+    }
+    
+    .kpi-value {
+        font-size: 2.2rem;
+    }
+    
+    /* Team Cards */
+    .team-card {
+        padding: 1.5rem;
+        margin: 0 0.5rem;
+    }
+    
+    .team-avatar {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .expertise-tags {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .expertise-tag {
+        margin: 0.25rem;
+    }
+    
+    /* Footer */
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem 1rem;
+        text-align: center;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Extra small devices */
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .container {
+        padding: 1.5rem 0.5rem;
+    }
+    
+    .energy-breakdown {
+        margin: 0 0.5rem;
+        padding: 1rem;
+    }
+    
+    .energy-chart-mobile {
+        height: 200px;
+    }
+    
+    .btn-large {
+        max-width: 250px;
+        padding: 0.875rem 1.25rem;
+        min-height: 44px;
+        font-size: 0.95rem;
+    }
+    
+    .feature-card,
+    .architecture-card,
+    .use-case-card,
+    .team-card,
+    .kpi-card {
+        margin: 0 0.25rem;
+        padding: 1.25rem;
+    }
+    
+    .legend-item-mobile {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
 }
 
 .footer-content {
