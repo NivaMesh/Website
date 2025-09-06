@@ -410,6 +410,103 @@ function initCharts() {
         });
     }
 
+    // Latency (Time Steps) Chart
+    const latencyTimeStepsCtx = document.getElementById('latencyTimeStepsChart');
+    if (latencyTimeStepsCtx) {
+        new Chart(latencyTimeStepsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Low Density', 'Medium Density', 'High Density', 'Extreme Density', 'Temporary High', 'Disaster Scenario'],
+                datasets: [{
+                    label: 'Latency (Time Steps)',
+                    data: [1418, 1655, 1068, 787, 1330, 1436],
+                    backgroundColor: [
+                        'rgba(0, 212, 255, 0.8)',
+                        'rgba(0, 255, 136, 0.8)',
+                        'rgba(0, 153, 204, 0.8)',
+                        'rgba(255, 193, 7, 0.8)',
+                        'rgba(255, 87, 34, 0.8)',
+                        'rgba(156, 39, 176, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(0, 212, 255, 1)',
+                        'rgba(0, 255, 136, 1)',
+                        'rgba(0, 153, 204, 1)',
+                        'rgba(255, 193, 7, 1)',
+                        'rgba(255, 87, 34, 1)',
+                        'rgba(156, 39, 176, 1)'
+                    ],
+                    borderWidth: 2,
+                    borderRadius: 8,
+                    borderSkipped: false,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(17, 17, 31, 0.9)',
+                        titleColor: '#ffffff',
+                        bodyColor: '#b0b0b0',
+                        borderColor: 'rgba(0, 212, 255, 0.3)',
+                        borderWidth: 1,
+                        cornerRadius: 8,
+                        displayColors: false,
+                        callbacks: {
+                            title: function(context) {
+                                return context[0].label;
+                            },
+                            label: function(context) {
+                                return context.parsed.y + ' steps';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#b0b0b0',
+                            font: {
+                                size: 12
+                            }
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0, 212, 255, 0.1)',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#b0b0b0',
+                            font: {
+                                size: 12
+                            },
+                            callback: function(value) {
+                                return value;
+                            }
+                        }
+                    }
+                },
+                animation: {
+                    duration: 2000,
+                    easing: 'easeOutQuart'
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                }
+            }
+        });
+    }
+
     // Coverage Rate Chart
     const coverageRateCtx = document.getElementById('coverageRateChart');
     if (coverageRateCtx) {
@@ -860,12 +957,25 @@ function initCardHighlighting() {
     const cards = document.querySelectorAll('.feature-card, .architecture-card, .use-case-card, .team-card, .energy-breakdown');
     
     cards.forEach(card => {
-        card.addEventListener('click', function() {
+        card.addEventListener('click', function(e) {
+            // If the click is on a link, don't highlight the card
+            if (e.target.closest('a')) {
+                return;
+            }
+            
             // Remove highlight from all cards
             cards.forEach(c => c.classList.remove('highlighted'));
             
             // Add highlight to clicked card
             this.classList.add('highlighted');
+        });
+    });
+
+    // Prevent card click when clicking on social links
+    const socialLinks = document.querySelectorAll('.social-link');
+    socialLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.stopPropagation();
         });
     });
 }
