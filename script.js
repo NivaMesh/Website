@@ -958,8 +958,8 @@ function initCardHighlighting() {
     
     cards.forEach(card => {
         card.addEventListener('click', function(e) {
-            // If the click is on a link, don't highlight the card
-            if (e.target.closest('a')) {
+            // If the click is on a link or inside a link, don't highlight the card
+            if (e.target.closest('a') || e.target.tagName === 'A') {
                 return;
             }
             
@@ -971,11 +971,20 @@ function initCardHighlighting() {
         });
     });
 
-    // Prevent card click when clicking on social links
-    const socialLinks = document.querySelectorAll('.social-link');
+    // Ensure social links work properly
+    const socialLinks = document.querySelectorAll('.social-link, .footer-social-link');
     socialLinks.forEach(link => {
         link.addEventListener('click', function(e) {
+            // Stop the event from bubbling up to the card
             e.stopPropagation();
+            
+            // Ensure the link opens properly
+            if (this.href && this.target === '_blank') {
+                // For links that should open in new tab
+                window.open(this.href, '_blank', 'noopener,noreferrer');
+                e.preventDefault();
+            }
+            // For other links, let the default behavior happen
         });
     });
 }
