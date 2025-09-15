@@ -638,6 +638,8 @@ section {
     background: linear-gradient(135deg, transparent, rgba(0, 212, 255, 0.05), transparent);
     opacity: 0;
     transition: opacity 0.3s ease;
+    /* Allow clicks to pass through to links/buttons inside cards */
+    pointer-events: none;
 }
 
 .feature-card:hover::before {
@@ -711,6 +713,8 @@ section {
     background: var(--gradient-primary);
     transform: scaleX(0);
     transition: transform 0.3s ease;
+    /* Ensure overlay does not block interactions */
+    pointer-events: none;
 }
 
 .architecture-card:hover::before {
@@ -1079,6 +1083,8 @@ section {
     background: linear-gradient(135deg, transparent, rgba(0, 212, 255, 0.05), transparent);
     opacity: 0;
     transition: opacity 0.3s ease;
+    /* Ensure overlay does not block interactions */
+    pointer-events: none;
 }
 
 .use-case-card:hover::before {
@@ -1208,6 +1214,8 @@ section {
     background: linear-gradient(135deg, transparent, rgba(0, 212, 255, 0.05), transparent);
     opacity: 0;
     transition: opacity 0.3s ease;
+    /* Ensure overlay does not block interactions */
+    pointer-events: none;
 }
 
 .team-card:hover::before {
