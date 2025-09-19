@@ -41,6 +41,6 @@ For collaborations, partnerships, or research discussions:
 
 📧 nivameshproject@gmail.com
 
-🌐 [Add Website Link if hosted]
+🌐 https://nivamesh.netlify.app/
 
 
